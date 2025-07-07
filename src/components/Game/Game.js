@@ -2,6 +2,7 @@ import React from 'react';
 import GuessInput from '../GuessInput';
 import GuessResults from '../GuessResults';
 import { sample } from '../../utils';
+import { checkGuess } from '../../game-helpers';
 import { WORDS } from '../../data';
 import { NUM_OF_GUESSES_ALLOWED } from '../../constants';
 
@@ -15,14 +16,17 @@ function Game() {
   
   function handleSubmit(event) {
     event.preventDefault();
-    
     if (guessList.length >= NUM_OF_GUESSES_ALLOWED) return;
+
+    const currentGuess = event.target[0].value;
     
+    const answers = checkGuess(currentGuess, answer);
+
     const newGuess = {
-      label: event.target[0].value,
+      letters: answers,
       id: crypto.randomUUID(),
     }
-    
+
     const nextGuessList = [...guessList, newGuess];
     setGuessList(nextGuessList);
   }

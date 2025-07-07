@@ -10,12 +10,12 @@ function GuessResults({ guessList }) {
     <div>
       <div>
         {guessList?.length > 0 && guessList.map((guess) => (
-          <Guess label={guess.label} key={guess.id} />
+          <Guess letters={guess.letters} key={guess.id} />
         ))}
       </div>
       <div>
-         {emptyGuesses.map((guess, index) => (
-          <Guess label={null} key={index} />
+         {emptyGuesses.map((_, index) => (
+          <Guess letters={null} key={index} />
         ))}
       </div>
     </div>
