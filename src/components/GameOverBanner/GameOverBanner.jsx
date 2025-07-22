@@ -1,6 +1,6 @@
 import React from 'react';
 
-function ResultBanner({ result, answer, attempts }) {
+function GameOverBanner({ result, answer, attempts, handleRestart }) {
   return (result && 
     <div className={`${result} banner`}>
       { 
@@ -13,8 +13,11 @@ function ResultBanner({ result, answer, attempts }) {
           Sorry, the correct answer is <strong>{answer}</strong>.
         </p>
       }
+      <div>
+        <button className="restart-button" type="button" onClick={handleRestart}>Restart</button>
+      </div>
     </div>
   );
 }
 
-export default ResultBanner;
+export default GameOverBanner;
