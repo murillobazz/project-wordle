@@ -2,7 +2,8 @@
   "name": "word-game",
   "version": "0.1.0",
   "private": true,
-  "author": "Josh Comeau <me@joshwcomeau.com>",
+  "author": "murillobazz",
+  "homepage": "./",
   "dependencies": {
     "eslint": "8.49.0",
     "eslint-config-react-app": "7.0.1",
@@ -20,5 +21,9 @@
     "build": "parcel build public/index.html --no-cache",
     "new-component": "new-component"
   },
-  "browserslist": "> 0.5%, last 2 versions, not dead"
+  "browserslist": "> 0.5%, last 2 versions, not dead",
+  "devDependencies": {
+    "@parcel/watcher": "^2.5.1",
+    "lightningcss": "^1.21.0"
+  }
 }
