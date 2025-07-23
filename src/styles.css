@@ -90,6 +90,46 @@ h1 {
   justify-content: center;
 }
 
+.keyboard-wrapper {
+  display: grid;
+  row-gap: 0.5ch;
+}
+
+.keyboard-row {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 0.5ch;
+}
+
+.keyboard-key {
+  font-weight: 600;
+  border-radius: 4px;
+  padding: 5px;
+  width: 28px;
+  text-align: center;
+}
+
+.keyboard-row .correct {
+  background: var(--color-success);
+  color: #ffffff;
+}
+
+.keyboard-row .misplaced {
+  background: var(--color-warning);
+  color: #ffffff;
+}
+
+.keyboard-row .incorrect {
+  background: var(--color-gray-300);
+  color: #ffffff;
+}
+
+.keyboard-row .unused {
+  background: var(--color-gray-900);
+  color: #000000;
+}
+
 .guess {
   display: flex;
   gap: 4px;

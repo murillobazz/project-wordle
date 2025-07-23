@@ -2,7 +2,8 @@ import React from 'react';
 import GuessInput from '../GuessInput';
 import GuessResults from '../GuessResults';
 import GameOverBanner from '../GameOverBanner';
-import { sample } from '../../utils';
+import GameKeyboard from '../GameKeyboard';
+import { sample, keyboardKeys } from '../../utils';
 import { checkGuess } from '../../game-helpers';
 import { WORDS } from '../../data';
 import { NUM_OF_GUESSES_ALLOWED } from '../../constants';
@@ -10,6 +11,9 @@ import { NUM_OF_GUESSES_ALLOWED } from '../../constants';
 function Game() {
   const [guessList, setGuessList] = React.useState([]);
   const [gameResult, setGameResult] = React.useState('');
+  const [keys, setKeys] = React.useState(() => {
+    return keyboardKeys;
+  })
   const [answer, setAnswer] = React.useState(() => {
     // Pick a random word on every pageload.
     return sample(WORDS);
@@ -37,6 +41,22 @@ function Game() {
 
     const nextGuessList = [...guessList, newGuess];
     setGuessList(nextGuessList);
+  
+    // Creates deep copy to avoid mutating the state directly with the spread operator.
+    let updatedKeys = keys.map(key => ({ ...key }));
+
+    // Check for the used letters and assign new status to them
+    for (let i = 0; i < answers.length; i++) {
+      for (let j = 0; j < updatedKeys.length; j++) {
+        if (updatedKeys[j].letter === answers[i].letter) {
+          updatedKeys[j].status = answers[i].status;
+        }
+      }
+    }
+
+    // When using deep copy, it's ok to set an entirely new array to an array state, since the original one was not mutated previously.
+    setKeys(updatedKeys);
+    
 
     if (checkWin(newGuess.letters)) {
       setGameResult('happy');
@@ -60,6 +80,7 @@ function Game() {
       <GuessResults guessList={guessList}/>
       <GuessInput onSubmit={handleSubmit} disabled={gameResult}/>
       <GameOverBanner handleRestart={handleRestart} result={gameResult} answer={answer} attempts={guessList.length}/>
+      <GameKeyboard keys={keys} />
     </>
   );
 }
